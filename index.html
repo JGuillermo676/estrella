@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Alexandra (Bobis)</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(to bottom right, #fff5f8, #fdfdfd);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+  }
 
+  /* Tarjeta más pequeña y transparente */
+  .card {
+    background: rgba(255, 255, 255, 0.85); /* transparencia para ver las flores */
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    padding: 15px 20px; /* más compacto */
+    width: 85%;
+    max-width: 350px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 { color: #d86ba3; font-size: 1.7rem; margin-bottom: 6px; }
+  h2 { color: #888; font-size: 0.95rem; margin-bottom: 12px; }
+  .poem { margin: 12px 0; font-size: 0.9rem; font-style: italic; line-height: 1.5; color: #555; white-space: pre-line; }
+
+  button {
+    margin-top: 12px;
+    padding: 9px 18px;
+    font-size: 0.9rem;
+    background: #d86ba3;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+  }
+  button:hover { background: #c05791; transform: scale(1.05); }
+
+  #personalPhoto {
+    margin-top: 12px;
+    max-width: 100%;
+    border-radius: 12px;
+    display: none;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+
+  #specialMessage {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #d86ba3;
+    display: none;
+  }
+
+  /* Emojis de flores cayendo */
+  .emoji {
+    position: absolute;
+    top: -50px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Para Alexandra 🌸</h1>
+  <h2>Bobis</h2>
+
+  <div class="poem">
+Bobis camina segura,
+lleva en sus pasos la luz más pura,
+con su mirada vence al destino,
+todo camino le abre camino.
+
+No hay muro alto que la detenga,
+ni sombra fría que la contenga,
+ella es un río, fuerte y constante,
+voz de esperanza, fuego vibrante.
+
+Con cada reto se hace más fuerte,
+no teme nunca a la propia suerte,
+su alma brilla, firme y sincera,
+Alexandra puede con todo, entera.
+  </div>
+
+  <button id="showPhotoBtn">Haz clic aquí</button>
+  <img id="personalPhoto" src="Imagen111.jpg" alt="Foto personal">
+  <div id="specialMessage">🌷 Con cariño y gratitud, siempre para ti 🌷</div>
+</div>
+
+<script>
+  // Mostrar foto y mensaje al hacer click
+  const button = document.getElementById("showPhotoBtn");
+  const photo = document.getElementById("personalPhoto");
+  const message = document.getElementById("specialMessage");
+
+  button.addEventListener("click", () => {
+    photo.style.display = "block";
+    message.style.display = "block";
+    button.style.display = "none"; // opcional: ocultar botón
+  });
+
+  // Emojis de flores cayendo constantemente
+  const emojis = ['🌸','🌷','🌺','💐','🌹'];
+  const totalEmojis = 50; // muchas flores
+  for(let i=0; i<totalEmojis; i++){
+    const span = document.createElement('span');
+    span.classList.add('emoji');
+    span.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    span.style.left = Math.random() * 100 + 'vw';
+    span.style.fontSize = (12 + Math.random()*20) + 'px';
+    span.style.animationDuration = (4 + Math.random()*6) + 's';
+    document.body.appendChild(span);
+  }
+</script>
+
+</body>
+</html>
