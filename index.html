@@ -4,82 +4,101 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para DaniCa</title>
+
 <style>
   body {
     margin: 0;
     padding: 0;
     font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(to bottom right, #fff5f8, #fdfdfd);
+    background: radial-gradient(circle at top, #111 0%, #000 70%);
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     position: relative;
+    color: white;
   }
 
-  /* Tarjeta más pequeña y transparente */
+  /* Tarjeta */
   .card {
-    background: rgba(255, 255, 255, 0.85); /* transparencia para ver las flores */
+    background: rgba(20, 20, 30, 0.85);
     border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    padding: 15px 20px; /* más compacto */
+    box-shadow: 0 0 25px rgba(255,255,255,0.15);
+    padding: 15px 20px;
     width: 85%;
     max-width: 350px;
     text-align: center;
     position: relative;
     z-index: 1;
+    backdrop-filter: blur(6px);
   }
 
-  h1 { color: #d86ba3; font-size: 1.7rem; margin-bottom: 6px; }
-  h2 { color: #888; font-size: 0.95rem; margin-bottom: 12px; }
-  .poem { margin: 12px 0; font-size: 0.9rem; font-style: italic; line-height: 1.5; color: #555; white-space: pre-line; }
+  h1 { color: #cfa7ff; font-size: 1.7rem; margin-bottom: 6px; }
+  h2 { color: #aaa; font-size: 0.95rem; margin-bottom: 12px; }
+
+  .poem {
+    margin: 12px 0;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: #ddd;
+    white-space: pre-line;
+  }
 
   button {
     margin-top: 12px;
     padding: 9px 18px;
     font-size: 0.9rem;
-    background: #d86ba3;
+    background: linear-gradient(135deg, #8a5cff, #cfa7ff);
     color: white;
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    transition: transform 0.3s, background 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
   }
-  button:hover { background: #c05791; transform: scale(1.05); }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px #cfa7ff;
+  }
 
   #personalPhoto {
     margin-top: 12px;
     max-width: 100%;
     border-radius: 12px;
     display: none;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
   }
 
   #specialMessage {
     margin-top: 8px;
     font-size: 0.9rem;
-    color: #d86ba3;
+    color: #cfa7ff;
     display: none;
   }
 
-  /* Emojis de flores cayendo */
+  /* Estrellas flotando */
   .emoji {
     position: absolute;
     top: -50px;
-    animation: fall linear infinite;
+    animation: float linear infinite;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 6px white);
   }
 
-  @keyframes fall {
-    0% { transform: translateY(-50px) rotate(0deg); }
-    100% { transform: translateY(110vh) rotate(360deg); }
+  @keyframes float {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
   }
 </style>
 </head>
+
 <body>
 
 <div class="card">
-  <h1>Para Alexandra 🌸</h1>
+  <h1>Para Alexandra ✨</h1>
   <h2>Bobis</h2>
 
   <div class="poem">
@@ -101,11 +120,11 @@ Alexandra puede con todo, entera.
 
   <button id="showPhotoBtn">Haz clic aquí</button>
   <img id="personalPhoto" src="Imagen111.jpg" alt="Foto personal">
-  <div id="specialMessage">🌷 Con cariño y gratitud, siempre para ti 🌷</div>
+  <div id="specialMessage">✨ Con cariño y gratitud, siempre para ti ✨</div>
 </div>
 
 <script>
-  // Mostrar foto y mensaje al hacer click
+  // Mostrar foto y mensaje
   const button = document.getElementById("showPhotoBtn");
   const photo = document.getElementById("personalPhoto");
   const message = document.getElementById("specialMessage");
@@ -113,19 +132,21 @@ Alexandra puede con todo, entera.
   button.addEventListener("click", () => {
     photo.style.display = "block";
     message.style.display = "block";
-    button.style.display = "none"; // opcional: ocultar botón
+    button.style.display = "none";
   });
 
-  // Emojis de flores cayendo constantemente
-  const emojis = ['🌸','🌷','🌺','💐','🌹'];
-  const totalEmojis = 50; // muchas flores
-  for(let i=0; i<totalEmojis; i++){
+  // Estrellas del universo
+  const stars = ['✨','⭐','🌟','✦','✧'];
+  const totalStars = 70;
+
+  for (let i = 0; i < totalStars; i++) {
     const span = document.createElement('span');
     span.classList.add('emoji');
-    span.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    span.textContent = stars[Math.floor(Math.random() * stars.length)];
     span.style.left = Math.random() * 100 + 'vw';
-    span.style.fontSize = (12 + Math.random()*20) + 'px';
-    span.style.animationDuration = (4 + Math.random()*6) + 's';
+    span.style.fontSize = (8 + Math.random() * 18) + 'px';
+    span.style.animationDuration = (6 + Math.random() * 10) + 's';
+    span.style.animationDelay = Math.random() * 5 + 's';
     document.body.appendChild(span);
   }
 </script>
