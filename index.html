@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para DaniCa</title>
 
+<!-- 📊 GOOGLE ANALYTICS -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XWZYW36YF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+  gtag('config', 'G-8XWZYW36YF');
+
+  // 🧪 EVENTO DE PRUEBA
+  gtag('event', 'test_visit_danica');
+
+  console.log("🔥 GA cargado en DaniCa");
+</script>
+
 <style>
   body {
     margin: 0;
@@ -20,7 +35,6 @@
     color: white;
   }
 
-  /* Tarjeta */
   .card {
     background: rgba(20, 20, 30, 0.85);
     border-radius: 20px;
@@ -32,20 +46,13 @@
     position: relative;
     z-index: 1;
     backdrop-filter: blur(6px);
-
-    transform: scale(0.7); /* ← 30% más pequeña */
+    transform: scale(0.7);
   }
 
   h1 {
     color: #cfa7ff;
     font-size: 1.7rem;
     margin-bottom: 6px;
-  }
-
-  h2 {
-    color: #aaa;
-    font-size: 0.95rem;
-    margin-bottom: 12px;
   }
 
   .poem {
@@ -89,7 +96,6 @@
     display: none;
   }
 
-  /* Estrellas flotando */
   .emoji {
     position: absolute;
     top: -50px;
@@ -109,7 +115,9 @@
 <body>
 
 <div class="card">
+
   <h1>Para Danna ✨</h1>
+
   <div class="poem">
 Danna, como un latido tímido de luz,
 como un sueño que empieza a brillar despacio.
@@ -136,12 +144,15 @@ que iluminan incluso sin ser miradas
   </div>
 
   <button id="showPhotoBtn">Haz clic aquí</button>
+
   <img id="personalPhoto" src="estrella.jpg" alt="Foto personal">
   <div id="specialMessage">✨Entre todas las estrellas, tú eres la que más brilla ✨</div>
+
 </div>
 
 <script>
-  // Mostrar foto y mensaje
+
+  /* FOTO */
   const button = document.getElementById("showPhotoBtn");
   const photo = document.getElementById("personalPhoto");
   const message = document.getElementById("specialMessage");
@@ -150,9 +161,26 @@ que iluminan incluso sin ser miradas
     photo.style.display = "block";
     message.style.display = "block";
     button.style.display = "none";
+
+    // 📊 evento analytics
+    gtag('event', 'photo_revealed_danica');
   });
 
-  // Estrellas del universo
+  /* 👤 VISITAS LOCALES */
+  let visitas = localStorage.getItem("visitas_danica") || 0;
+  visitas++;
+  localStorage.setItem("visitas_danica", visitas);
+
+  console.log("Visitas DaniCa:", visitas);
+
+  /* 🌍 CONTADOR GLOBAL */
+  fetch("https://api.countapi.xyz/hit/danica-stars/visitas")
+  .then(res=>res.json())
+  .then(data=>{
+    console.log("Visitas globales:", data.value);
+  });
+
+  /* ESTRELLAS */
   const stars = ['✨','⭐','🌟','✦','✧'];
   const totalStars = 70;
 
@@ -166,6 +194,7 @@ que iluminan incluso sin ser miradas
     span.style.animationDelay = Math.random() * 5 + 's';
     document.body.appendChild(span);
   }
+
 </script>
 
 </body>
